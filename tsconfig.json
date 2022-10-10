@@ -12,6 +12,7 @@
         "strict": true,
         "target": "ES2017",
         "types": ["@moddota/panorama-types"],
-        "lib": ["ES2017"]
+        "lib": ["ES2017"],
+        "paths": {}
     }
 }
