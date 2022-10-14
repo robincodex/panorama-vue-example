@@ -7,3 +7,7 @@ TODOs.md
 *.log
 .idea
 dist
+/content/**/*.xml
+/content/**/*.js
+/content/**/*.css
+!/content/vue_example/panorama/layout/custom_game/custom_ui_manifest.xml

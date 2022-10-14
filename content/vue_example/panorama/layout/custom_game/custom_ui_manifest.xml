@@ -1,0 +1,6 @@
+<root>
+	<Panel>
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/lowhud.xml" />
+        <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/shop.xml" />
+	</Panel>
+</root>
