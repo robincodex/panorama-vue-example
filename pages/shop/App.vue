@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Item from './components/Item.vue';
 const {count} = defineProps<{count: number}>()
 </script>
 
@@ -6,6 +7,7 @@ const {count} = defineProps<{count: number}>()
     <Button @click="count++">Count is: {{ count }}</Button>
     <Button @activate="count++" class="Red" >{{ count }}</Button>
     <Label text="xxxx" />
+    <Item name="ShopItem" />
 </template>
 
 <style lang="scss" scoped>

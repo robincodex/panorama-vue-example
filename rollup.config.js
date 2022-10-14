@@ -3,13 +3,13 @@ import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import CompatibleVueScopeID from './plugins/compatible-vue-scope-id';
+import ScssCompiler from './plugins/scss-compiler';
 import { fileURLToPath, URL } from 'node:url';
 import alias from '@rollup/plugin-alias';
 import path from 'node:path';
 import babel from '@rollup/plugin-babel';
-import scss from 'rollup-plugin-scss';
-import { writeFileSync } from 'node:fs';
+
+// @ts-check
 
 const pageNameMatcher = /pages\\([\w\d\-_]+)\\App.vue/;
 
@@ -42,19 +42,20 @@ const options = {
         }),
         vue({ customElement: false }),
         vueJsx(),
-        scss({
-            output: function (styles, styleNodes) {
-                console.log(styles);
-                for (const [id, code] of Object.entries(styleNodes)) {
-                    const u = new URL(id);
-                    const result = u.pathname.match(pageNameMatcher);
-                    if (result) {
-                        console.log(result[1]);
-                        writeFileSync(`dist/${result[1]}.css`, code);
-                    }
-                }
-            }
-        }),
+        ScssCompiler(),
+        // scss({
+        //     output: function (styles, styleNodes) {
+        //         console.log(styles);
+        //         for (const [id, code] of Object.entries(styleNodes)) {
+        //             const u = new URL(id);
+        //             const result = u.pathname.match(pageNameMatcher);
+        //             if (result) {
+        //                 console.log(result[1]);
+        //                 writeFileSync(`dist/${result[1]}.css`, code);
+        //             }
+        //         }
+        //     }
+        // }),
         commonjs(),
         nodeResolve(),
         rollupTypescript(),
