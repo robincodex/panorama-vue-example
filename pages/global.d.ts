@@ -1,6 +1,7 @@
 declare module '*.vue' {
-    const Component: any;
-    export default Component;
+    import type { DefineComponent } from 'vue';
+    const component: DefineComponent<{}, {}, any>;
+    export default component;
 }
 
 declare module '*.scss';

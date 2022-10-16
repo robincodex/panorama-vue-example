@@ -4,10 +4,12 @@ const {count} = defineProps<{count: number}>()
 </script>
 
 <template>
-    <Button @click="count++">Count is: {{ count }}</Button>
-    <Button @activate="count++" class="Red" >{{ count }}</Button>
-    <Label text="xxxx" />
-    <Item name="ShopItem" />
+    <Panel>
+        <Button @click="count++">Count is: {{ count }}</Button>
+        <Button @activate="count++" class="Red" >{{ count }}</Button>
+        <Label text="xxx" ></Label>
+        <Item name="ShopItem" />
+    </Panel>
 </template>
 
 <style lang="scss" scoped>

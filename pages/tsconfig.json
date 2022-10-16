@@ -6,6 +6,7 @@
         "noImplicitAny": true,
         "experimentalDecorators": true,
         "allowJs": true,
+        "removeComments": true,
         "inlineSourceMap": true,
         "moduleResolution": "Node",
         "esModuleInterop": true,
