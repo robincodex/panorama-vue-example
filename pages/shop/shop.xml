@@ -1,14 +1,12 @@
 <root>
     <styles>
         <include src="s2r://panorama/styles/dotastyles.vcss_c" />
-        <include src="file://{resources}/styles/custom_game/tophud.css" />
+        <include src="file://{resources}/styles/custom_game/shop.css" />
     </styles>
     <scripts>
-        <include src="file://{resources}/scripts/custom_game/globals.js" />
-        <include src="file://{resources}/scripts/custom_game/timer.js" />
-        <include src="file://{resources}/scripts/custom_game/tophud.js" />
+        <include src="file://{resources}/scripts/custom_game/common.js" />
+        <include src="file://{resources}/scripts/custom_game/shop.js" />
     </scripts>
     <Panel>
-        <Panel id="app" />
     </Panel>
 </root>

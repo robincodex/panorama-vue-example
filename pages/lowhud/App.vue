@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-    <button @click="count++">Count is: {{ count }}</button>
+    <Button @click="count++">Count is: {{ count }}</Button>
 </template>
 
 <style lang="scss" scoped>

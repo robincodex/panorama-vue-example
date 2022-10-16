@@ -12,16 +12,10 @@ import { RollupWatchOptions } from 'rollup';
 import chalk from 'chalk';
 import { existsSync, readdirSync, statSync } from 'node:fs';
 import alias from '@rollup/plugin-alias';
+import compatiblePanorama from './plugins/compatible-panorama';
+import replace from '@rollup/plugin-replace';
 
 const cli_prefix = `[${chalk.magenta('Panorama')}]`;
-
-function path_step(p: string) {
-    return p.replace(/\\/g, '/');
-}
-
-function file_color(s: string) {
-    return chalk.green(s);
-}
 
 function isDir(p: string) {
     return statSync(p).isDirectory();
@@ -54,10 +48,22 @@ export default function GetRollupWatchOptions(rootPath: string) {
         },
         plugins: [
             // @ts-ignore
-            vue({ customElement: false }),
+            vue({ isProduction: true, customElement: false }),
             // @ts-ignore
             vueJsx(),
             scssCompiler({ prefix: cli_prefix }),
+            compatiblePanorama(),
+            replace({
+                preventAssignment: true,
+                'process.env.NODE_ENV': JSON.stringify('production'),
+                __DEV__: false,
+                __TEST__: false,
+                __ESM_BUNDLER__: false,
+                __FEATURE_SUSPENSE__: false,
+                __COMPAT__: false,
+                __FEATURE_OPTIONS_API__: false,
+                __FEATURE_PROD_DEVTOOLS__: false
+            }),
             commonjs(),
             nodeResolve(),
             babel({
@@ -86,49 +92,4 @@ export default function GetRollupWatchOptions(rootPath: string) {
     };
 
     return options;
-}
-
-function tsOptions(rootPath: string): RollupTypescriptOptions {
-    return {
-        tsconfig: path.join(rootPath, `tsconfig.json`),
-        transformers: {
-            after: [
-                {
-                    type: 'program',
-                    factory(program) {
-                        // 显示错误
-                        const diagnostics = [
-                            ...program.getGlobalDiagnostics(),
-                            ...program.getOptionsDiagnostics(),
-                            ...program.getSemanticDiagnostics(),
-                            ...program.getSyntacticDiagnostics(),
-                            ...program.getDeclarationDiagnostics(),
-                            ...program.getConfigFileParsingDiagnostics()
-                        ];
-                        for (const d of diagnostics) {
-                            let msg = '';
-                            if (typeof d.messageText === 'string') {
-                                msg = d.messageText;
-                            } else {
-                                msg = d.messageText.messageText;
-                            }
-                            console.log(`${cli_prefix} TS Error: ${chalk.redBright(
-                                d.file?.fileName.replace(rootPath + '/', '')
-                            )}: ${chalk.yellow(
-                                d.file?.getLineAndCharacterOfPosition(
-                                    d.start || 0
-                                ).line
-                            )}
-${cli_prefix} TS Error: - ${chalk.red(msg)}`);
-                        }
-                        return () => {
-                            return f => {
-                                return f;
-                            };
-                        };
-                    }
-                }
-            ]
-        }
-    };
 }

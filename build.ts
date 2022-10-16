@@ -78,7 +78,7 @@ async function onXMLChange(filePath: string, stats?: Stats | undefined) {
     const fileName = path.basename(filePath).replace('.xml', '');
     console.log(
         cli_prefix +
-            ' XML ' +
+            ' 🐤 ' +
             file_color(`${fileName}.xml`) +
             ' >> ' +
             chalk.blue(dirName + '.xml')
@@ -106,13 +106,13 @@ async function onXMLChange(filePath: string, stats?: Stats | undefined) {
 export default async function TaskPUI() {
     StartRollup();
     // 监听XML
-    // const xmlFiles = glob.sync(path.join(rootPath, '**/*.xml'));
-    // const watchXML = chokidar.watch(
-    //     [...xmlFiles, path.join(rootPath, '**/*.xml')],
-    //     { ignoreInitial: false }
-    // );
-    // watchXML.on('change', onXMLChange);
-    // watchXML.on('add', onXMLChange);
+    const xmlFiles = glob.sync(path.join(rootPath, '**/*.xml'));
+    const watchXML = chokidar.watch(
+        [...xmlFiles, path.join(rootPath, '**/*.xml')],
+        { ignoreInitial: false }
+    );
+    watchXML.on('change', onXMLChange);
+    watchXML.on('add', onXMLChange);
 }
 
 TaskPUI();

@@ -1,7 +1,7 @@
 {
-    "name": "panorama-vue-demo",
+    "name": "panorama-vue-example",
     "version": "0.0.1",
-    "description": "Demo",
+    "description": "Vue example in Dota2 Panorama",
     "main": "index.js",
     "author": "RobinCode",
     "license": "MIT",
