@@ -1,18 +1,15 @@
 {
-    "include": ["pages/**/*.ts", "pages/**/*.tsx"],
+    "include": ["./*.ts"],
     "compilerOptions": {
         "rootDir": ".",
-        "removeComments": true,
         "noImplicitAny": true,
         "experimentalDecorators": true,
         "allowJs": true,
-        "inlineSourceMap": false,
+        "inlineSourceMap": true,
         "moduleResolution": "Node",
-        "sourceMap": false,
+        "esModuleInterop": true,
         "strict": true,
         "target": "ES2017",
-        "types": ["@moddota/panorama-types"],
-        "lib": ["ES2017"],
-        "paths": {}
+        "lib": ["ES2017"]
     }
 }

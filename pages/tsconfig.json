@@ -1,0 +1,16 @@
+{
+    "include": ["**/*.ts"],
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": false,
+        "noImplicitAny": true,
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "inlineSourceMap": true,
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "strict": true,
+        "target": "ES2017",
+        "lib": ["ES2017"]
+    }
+}
