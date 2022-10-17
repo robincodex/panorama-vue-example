@@ -70,9 +70,8 @@ export default function GetRollupWatchOptions(rootPath: string) {
                 exclude: 'node_modules/**',
                 extensions: ['.ts', '.tsx', '.vue'],
                 babelHelpers: 'bundled',
-                presets: [['@babel/preset-env', { modules: false }]]
+                presets: [['@babel/preset-env']]
             })
-            // rollupTypescript(tsOptions(rootPath))
         ],
         manualChunks(id, api) {
             if (id.includes('plugin-vue')) {
@@ -82,10 +81,6 @@ export default function GetRollupWatchOptions(rootPath: string) {
                 return 'common';
             }
             if (id.search(/[\\/]node_modules[\\/]/) >= 0) {
-                if (id.includes('/node_modules/panorama-vue/')) {
-                    console.log(id);
-                    return;
-                }
                 return 'common';
             }
         }
