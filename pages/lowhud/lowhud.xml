@@ -7,6 +7,6 @@
         <include src="file://{resources}/scripts/custom_game/common.js" />
         <include src="file://{resources}/scripts/custom_game/lowhud.js" />
     </scripts>
-    <Panel>
+    <Panel class="root">
     </Panel>
 </root>
