@@ -1081,10 +1081,10 @@
     "@moddota/panorama-types" "^1.21.0"
     "@vue/shared" "^3.2.38"
 
-"@panorama-vue/renderer@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@panorama-vue/renderer/-/renderer-0.0.2.tgz#7d378d309c69e088c1153db7bb38647e7a046c51"
-  integrity sha512-2GrJ/9zQdzakqQayLSPGep8wJk+HO/zbg036wHOiC/rRyNNngjpUTde/wRpHm4QtohOeq4mOsG20QnFck1aMsQ==
+"@panorama-vue/renderer@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@panorama-vue/renderer/-/renderer-0.0.3.tgz#22acd3a9ebf32bdf1187187c364a3db690e18a21"
+  integrity sha512-WAvcOmDri4VvMJyRlMoPwYbe747Hh2EZ0heh2TLuWsILX+wSzfAsbW1o1Q5FhD1fQTR8/Uj0OwQSFXlmfHG7/Q==
   dependencies:
     "@moddota/panorama-types" "^1.21.0"
     "@panorama-vue/reactivity" "^0.0.1"

@@ -1,5 +1,6 @@
 build
 coverage
-dist
+**/dist
+**/vue_example
 .github
 package.json
