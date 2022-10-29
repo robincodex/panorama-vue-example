@@ -25,11 +25,13 @@ yarn start
 
 此范例仅支持 scss，每个页面下的 vue 内的样式和 scss 文件会合并编译成一个文件。
 
+插件参考[plugins/scss-compiler.ts](./plugins/scss-compiler.ts)
+
 ## 关于编译
 
 打包工具采用[Rollup](https://rollupjs.org/guide/en/)，vue 的编译插件使用的是[@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
 
-适配的过程中发现还是挺多兼容性问题，所以改造的东西比较多，如果要用其它工具如 webpack 也是可行的，可参考[compatible-panorama.ts](./plugins/compatible-panorama.ts)这个插件中的`resolveId`，主要是把 vue 的一些文件指向改造后的文件基本就可行了。
+适配的过程中发现还是挺多兼容性问题，所以改造的东西比较多，如果要用其它工具如 webpack 也是可行的，可参考[plugins/compatible-panorama.ts](./plugins/compatible-panorama.ts)这个插件中的`resolveId`，主要是把 vue 的一些文件指向改造后的文件基本就可行了。
 
 ## 关于 Ref
 

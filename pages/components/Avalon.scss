@@ -1,0 +1,22 @@
+@mixin align($type) {
+    @if $type == central {
+        horizontal-align: center;
+        vertical-align: middle;
+    } @else if $type == center or $type == left or $type == right {
+        horizontal-align: $type;
+    } @else if $type == bottom or $type == middle or $type == top {
+        vertical-align: $type;
+    }
+}
+
+@mixin flow($type, $wrap: false) {
+    @if $type == right {
+        @if $wrap == true {
+            flow-children: right-wrap;
+        } @else {
+            flow-children: right;
+        }
+    } @else if $type == down {
+        flow-children: down;
+    }
+}

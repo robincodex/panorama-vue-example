@@ -6,7 +6,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import scssCompiler from './plugins/scss-compiler';
-import path from 'node:path';
+import path, { join } from 'node:path';
 import babel from '@rollup/plugin-babel';
 import { RollupWatchOptions } from 'rollup';
 import chalk from 'chalk';
@@ -47,37 +47,52 @@ export default function GetRollupWatchOptions(rootPath: string) {
             assetFileNames: `[name].[ext]`
         },
         plugins: [
-            // @ts-ignore
-            vue({ isProduction: true, customElement: false }),
-            // @ts-ignore
-            vueJsx(),
-            scssCompiler({ prefix: cli_prefix }),
-            compatiblePanorama(),
+            alias({
+                entries: [
+                    {
+                        find: '@common/(.*)',
+                        replacement: join(__dirname, 'pages/common/$1.ts')
+                    }
+                ]
+            }),
             replace({
                 preventAssignment: true,
                 'process.env.NODE_ENV': JSON.stringify('production'),
+                // 'process.env.NODE_ENV': JSON.stringify('development'),
                 __DEV__: false,
                 __TEST__: false,
                 __ESM_BUNDLER__: false,
                 __FEATURE_SUSPENSE__: false,
                 __COMPAT__: false,
                 __FEATURE_OPTIONS_API__: false,
-                __FEATURE_PROD_DEVTOOLS__: false
+                __FEATURE_PROD_DEVTOOLS__: false,
+                __VUE_PROD_DEVTOOLS__: false,
+                __VUE_OPTIONS_API__: false
             }),
+            // rollupTypescript({
+            //     tsconfig: path.join(rootPath, `tsconfig.json`)
+            // }),
+            // @ts-ignore
+            vue({ isProduction: false, customElement: false }),
+            // @ts-ignore
+            vueJsx(),
+            scssCompiler({ prefix: cli_prefix }),
+            compatiblePanorama(),
             commonjs(),
             nodeResolve(),
             babel({
+                comments: false,
                 exclude: 'node_modules/**',
-                extensions: ['.ts', '.tsx', '.vue'],
-                babelHelpers: 'bundled',
-                presets: [['@babel/preset-env']]
+                extensions: ['.js', '.ts', '.tsx', '.vue'],
+                babelHelpers: 'bundled'
             })
         ],
         manualChunks(id, api) {
-            if (id.includes('plugin-vue')) {
-                return 'common';
+            // const u = new URL(id, 'file:');
+            if (id.includes('node_modules') && id.includes('vue')) {
+                return 'vue';
             }
-            if (id.search(/[\\/]global[\\/]/) >= 0) {
+            if (id.search(/[\\/]common[\\/]/) >= 0) {
                 return 'common';
             }
             if (id.search(/[\\/]node_modules[\\/]/) >= 0) {

@@ -9,6 +9,8 @@ TODOs.md
 dist
 /content/**/*.xml
 /content/**/*.js
+!/content/**/custom_loading_screen.js
+!/content/**/panorama-polyfill.js
 /content/**/*.css
 !/content/vue_example/panorama/layout/custom_game/custom_ui_manifest.xml
 *.vjs_c

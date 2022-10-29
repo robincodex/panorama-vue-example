@@ -4,7 +4,6 @@
         <include src="file://{resources}/styles/custom_game/lowhud.css" />
     </styles>
     <scripts>
-        <include src="file://{resources}/scripts/custom_game/common.js" />
         <include src="file://{resources}/scripts/custom_game/lowhud.js" />
     </scripts>
     <Panel class="root">

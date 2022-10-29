@@ -1,6 +1,7 @@
 {
-    "include": ["./*.ts"],
+    "include": ["**/*.ts", "**/*.vue"],
     "compilerOptions": {
+        "baseUrl": "./pages",
         "rootDir": ".",
         "noImplicitAny": true,
         "experimentalDecorators": true,

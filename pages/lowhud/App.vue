@@ -1,15 +1,18 @@
 <script lang="ts">
+import IHButton from '../components/IHButton.vue';
+
 export default {
     data() {
         return {
             count: 0
         };
-    }
+    },
+    components: { IHButton }
 };
 </script>
 
 <template>
-    <Button @click="count++">Count is: {{ count }}</Button>
+    <IHButton text="按钮 正常" ></IHButton>
 </template>
 
 <style lang="scss" scoped>

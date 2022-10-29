@@ -1,6 +1,7 @@
 {
-    "include": ["**/*.ts"],
+    "include": ["**/*.ts", "**/*.vue"],
     "compilerOptions": {
+        "baseUrl": ".",
         "rootDir": ".",
         "sourceMap": false,
         "noImplicitAny": true,
@@ -12,6 +13,10 @@
         "esModuleInterop": true,
         "strict": true,
         "target": "ES2017",
-        "lib": ["ES2017"]
+        "types": ["@moddota/panorama-types"],
+        "lib": ["ES2017"],
+        "paths": {
+            "@common/*": ["./common/*"]
+        }
     }
 }

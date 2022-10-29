@@ -1,5 +1,5 @@
 import { basename, join } from 'node:path';
-import { URL } from 'node:url';
+import { fileURLToPath, pathToFileURL, URL } from 'node:url';
 import { Plugin } from 'rollup';
 import { compileStringAsync, StringOptions } from 'sass';
 import fse from 'fs-extra';
@@ -77,7 +77,18 @@ export default function scssCompiler(options?: {
             }
             for (const [fileName, codeList] of Object.entries(srcCache)) {
                 const code = codeList.map(v => v.code).join('\n\n');
-                const result = await compileStringAsync(code, options?.sass);
+                const result = await compileStringAsync(code, {
+                    importer: {
+                        findFileUrl(url, options) {
+                            console.log(url);
+                            // const u = new URL(url, 'file:');
+                            return null;
+                        }
+                    },
+                    url: pathToFileURL(
+                        join(__dirname, `../pages/${fileName}/${fileName}.scss`)
+                    )
+                });
 
                 // 比较编译后的结果，如果没有变化则不输出
                 const dest = join(o.dir, `${fileName}.css`)
