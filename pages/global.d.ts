@@ -5,3 +5,9 @@ declare module '*.vue' {
 }
 
 declare module '*.scss';
+
+declare const console: {
+    log(...args: any[]): void;
+    warn(...args: any[]): void;
+    info(...args: any[]): void;
+};
