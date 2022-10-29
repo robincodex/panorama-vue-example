@@ -1,18 +1,9 @@
-<script lang="ts">
-import IHButton from '../components/IHButton.vue';
-
-export default {
-    data() {
-        return {
-            count: 0
-        };
-    },
-    components: { IHButton }
-};
+<script setup lang="ts">
+import VButton from '../components/VButton.vue';
 </script>
 
 <template>
-    <IHButton text="按钮 正常" ></IHButton>
+    <VButton text="按钮 正常" ></VButton>
 </template>
 
 <style lang="scss" scoped>

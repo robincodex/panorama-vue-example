@@ -1117,10 +1117,10 @@
   dependencies:
     tslib "^2.0.3"
 
-"@panorama-vue/renderer@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@panorama-vue/renderer/-/renderer-0.0.8.tgz#985d3e054b75d9a0cf8deb8df551194a76aead5e"
-  integrity sha512-fY87qfwyZuakj+ej+Pr4AK73aYq4mpCnX1IB5Vp4XncndaMvCMx7bc9jrKtufv4C4j08l9/KunWzv+yHL7+tdA==
+"@panorama-vue/renderer@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@panorama-vue/renderer/-/renderer-0.0.9.tgz#3156b1d2761dca8a135657b5e747f2dcfae6c95d"
+  integrity sha512-isRJoUN++XdBf/3k7W7fHSPdFrDmwu7u5tVVweiVfWGRtFr3uKj2IXNQKKHAmE3l3Fer53gnLPCcBZifamreBQ==
   dependencies:
     "@moddota/panorama-types" "^1.21.0"
     "@vue/runtime-core" "^3.2.38"

@@ -14,7 +14,7 @@
         "@babel/preset-env": "^7.19.3",
         "@babel/preset-typescript": "^7.18.6",
         "@moddota/panorama-types": "^1.21.0",
-        "@panorama-vue/renderer": "^0.0.8",
+        "@panorama-vue/renderer": "^0.0.9",
         "@rollup/plugin-alias": "^4.0.0",
         "@rollup/plugin-babel": "^6.0.0",
         "@rollup/plugin-commonjs": "^23.0.0",

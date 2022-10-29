@@ -19,11 +19,13 @@ export default function scssCompiler(options?: {
 }): Plugin {
     const existsScopeId = /\[data-v-[a-z0-9]{8}\]/;
     const replaceScopeId = /\[(data-v-[a-z0-9]{8})\]/g;
-    // 缓存代码
-    let srcCache: Record<
+    // 缓存scss代码
+    const srcCache: Record<
         string,
         Array<{ pathname: string; code: string }>
     > = {};
+    // 缓存components中组件的scss代码
+    const componentsCache: Record<string, string> = {};
     const prefix = options?.prefix || '';
 
     /** 将如[data-v-xxxxx]这类的样式改为class，因为PUI不支持[]这类匹配 */
@@ -56,6 +58,13 @@ export default function scssCompiler(options?: {
             ) {
                 code = fitCode(code);
                 const name = findPageName(id);
+                if (name === 'components') {
+                    const shortPath = u.pathname.slice(
+                        u.pathname.indexOf('components\\')
+                    );
+                    componentsCache[shortPath] = code;
+                    return '';
+                }
                 if (!srcCache[name]) {
                     srcCache[name] = [];
                 }
@@ -76,15 +85,45 @@ export default function scssCompiler(options?: {
                 return;
             }
             for (const [fileName, codeList] of Object.entries(srcCache)) {
-                const code = codeList.map(v => v.code).join('\n\n');
-                const result = await compileStringAsync(code, {
-                    importer: {
-                        findFileUrl(url, options) {
-                            console.log(url);
-                            // const u = new URL(url, 'file:');
-                            return null;
+                // 先找出这个页面引用components的scss，然后合并起来
+                let components: string[] = [];
+                for (const id of this.getModuleIds()) {
+                    const info = this.getModuleInfo(id);
+                    if (!info) {
+                        continue;
+                    }
+                    if (!id.endsWith('.vue')) {
+                        continue;
+                    }
+                    const name = findPageName(id);
+                    if (name !== 'components') {
+                        continue;
+                    }
+                    const shortPath = id.slice(id.indexOf('components\\'));
+                    for (const [p, code] of Object.entries(componentsCache)) {
+                        if (p === shortPath) {
+                            for (const mid of info.importers) {
+                                const importerName = findPageName(mid);
+                                if (importerName === fileName) {
+                                    components.push(code);
+                                    break;
+                                }
+                            }
+                            break;
                         }
-                    },
+                    }
+                }
+                const code = [...components, ...codeList.map(v => v.code)].join(
+                    '\n\n'
+                );
+                const result = await compileStringAsync(code, {
+                    // importer: {
+                    //     findFileUrl(url, options) {
+                    //         // console.log(url);
+                    //         // const u = new URL(url, 'file:');
+                    //         return null;
+                    //     }
+                    // },
                     url: pathToFileURL(
                         join(__dirname, `../pages/${fileName}/${fileName}.scss`)
                     )
